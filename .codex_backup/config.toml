@@ -1,0 +1,71 @@
+# oh-my-codex top-level settings (must be before any [table])
+notify = ["node", "/home/ajrqh1030/.nvm/versions/node/v24.15.0/lib/node_modules/oh-my-codex/dist/scripts/notify-hook.js"]
+model_reasoning_effort = "medium"
+developer_instructions = "You have oh-my-codex installed. AGENTS.md is the orchestration brain and main control surface. Follow AGENTS.md for skill/keyword routing, $name workflow invocation, and role-specialized subagents. Use outcome-first, concise progress updates: state the target result, constraints, validation evidence, and stop condition before adding process detail. Native subagents live in .codex/agents and may handle independent parallel subtasks within one Codex session or team pane. Skills load from .codex/skills, not native-agent TOMLs. Treat installed prompts as narrower execution surfaces under AGENTS.md authority."
+
+model = "gpt-5.4"
+# oh-my-codex seeded behavioral defaults (uninstall removes unchanged defaults)
+model_context_window = 250000
+model_auto_compact_token_limit = 200000
+# End oh-my-codex seeded behavioral defaults
+
+[features]
+multi_agent = true
+child_agents_md = true
+codex_hooks = true
+
+goals = true
+[agents]
+max_threads = 6
+max_depth = 2
+
+[shell_environment_policy.set]
+USE_OMX_EXPLORE_CMD = "1"
+
+# ============================================================
+# oh-my-codex (OMX) Configuration
+# Managed by omx setup - manual edits preserved on next setup
+# ============================================================
+
+# OMX State Management MCP Server
+[mcp_servers.omx_state]
+command = "/home/ajrqh1030/.nvm/versions/node/v24.15.0/bin/node"
+args = ["/home/ajrqh1030/.nvm/versions/node/v24.15.0/lib/node_modules/oh-my-codex/dist/mcp/state-server.js"]
+enabled = true
+startup_timeout_sec = 5
+
+# OMX Project Memory MCP Server
+[mcp_servers.omx_memory]
+command = "/home/ajrqh1030/.nvm/versions/node/v24.15.0/bin/node"
+args = ["/home/ajrqh1030/.nvm/versions/node/v24.15.0/lib/node_modules/oh-my-codex/dist/mcp/memory-server.js"]
+enabled = true
+startup_timeout_sec = 5
+
+# OMX Code Intelligence MCP Server (LSP diagnostics, AST search)
+[mcp_servers.omx_code_intel]
+command = "/home/ajrqh1030/.nvm/versions/node/v24.15.0/bin/node"
+args = ["/home/ajrqh1030/.nvm/versions/node/v24.15.0/lib/node_modules/oh-my-codex/dist/mcp/code-intel-server.js"]
+enabled = true
+startup_timeout_sec = 10
+
+# OMX Trace MCP Server (agent flow timeline & statistics)
+[mcp_servers.omx_trace]
+command = "/home/ajrqh1030/.nvm/versions/node/v24.15.0/bin/node"
+args = ["/home/ajrqh1030/.nvm/versions/node/v24.15.0/lib/node_modules/oh-my-codex/dist/mcp/trace-server.js"]
+enabled = true
+startup_timeout_sec = 5
+
+# OMX Wiki MCP Server (persistent project knowledge base)
+[mcp_servers.omx_wiki]
+command = "/home/ajrqh1030/.nvm/versions/node/v24.15.0/bin/node"
+args = ["/home/ajrqh1030/.nvm/versions/node/v24.15.0/lib/node_modules/oh-my-codex/dist/mcp/wiki-server.js"]
+enabled = true
+startup_timeout_sec = 5
+
+# OMX TUI StatusLine (Codex CLI v0.101.0+)
+[tui]
+# omx:managed-status-line
+status_line = ["model-with-reasoning", "git-branch", "context-remaining", "total-input-tokens", "total-output-tokens", "five-hour-limit", "weekly-limit"]
+
+# ============================================================
+# End oh-my-codex
