@@ -14,7 +14,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <section className="flex min-h-dvh flex-col bg-[#FAF6EE] px-6 py-5 animate-fade-in">
+    <section className="flex min-h-dvh flex-col bg-transparent px-6 py-5 animate-fade-in">
       <header className="grid grid-cols-3 items-center font-body text-sm text-ink">
         <Link href="/login" className="font-medium">← 뒤로</Link>
         <h1 className="text-center font-bold">비밀번호 찾기</h1>
@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="mt-2 h-[52px] w-full rounded-xl bg-[#F5F1EA] px-4 text-sm outline-none focus:ring-[1.5px] focus:ring-[#003478]"
+              className="mt-2 h-[52px] w-full rounded-xl bg-[#F5F0E8] px-4 text-sm outline-none focus:ring-[1.5px] focus:ring-[#003478]"
             />
           </label>
 

@@ -3,27 +3,20 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Hani } from '@/components/hani/Hani'
 import { cn } from '@/utils/cn'
 
 const slides = [
   {
-    hani: <Hani pose="holding" face="default" size={180} animate="float" />,
-    title: '글쓰기가 어렵게\n느껴졌나요?',
-    description: '잘 쓰는 것보다 꾸준히\n쓰는 게 먼저예요.',
-    button: '다음 →',
+    title: '글쓰기가 어렵게 느껴졌나요?',
+    description: '잘 쓰는 것보다 꾸준히 쓰는 게 먼저에요.',
   },
   {
-    hani: <Hani pose="cheering" face="happy" size={180} animate="bounce" />,
     title: '평가 없이, 제안만 해요.',
     description: '한이가 틀렸다고 말하는 대신\n더 나은 표현을 함께 찾아드려요.',
-    button: '다음 →',
   },
   {
-    hani: <Hani pose="holding" face="happy" size={180} animate="nod" />,
-    title: '매일 쌓인 글이\n나만의 책이 돼요.',
+    title: '매일 쌓인 글이 나만의 책이 돼요.',
     description: '100자부터 시작해서\n언젠가 한 권의 책이 완성돼요.',
-    button: '시작하기',
   },
 ]
 
@@ -66,44 +59,38 @@ export default function IntroPage() {
 
   return (
     <section
-      className="flex min-h-dvh flex-col bg-[#FAF6EE] px-6 animate-fade-in"
+      className="relative flex min-h-dvh flex-col bg-transparent px-6 animate-fade-in"
       onTouchStart={(event) => setTouchStartX(event.touches[0]?.clientX ?? null)}
       onTouchEnd={handleTouchEnd}
     >
-      <header className="flex justify-end py-5">
+      <header className="flex h-[72px] shrink-0 items-center justify-end pt-4">
         <button
           type="button"
           onClick={goToLogin}
-          className="font-body text-sm font-medium text-ink/60 transition-colors hover:text-ink"
+          className="font-title text-[14px] leading-none text-ink transition-colors hover:text-ink/70"
         >
           건너뛰기
         </button>
       </header>
 
-      <div className="flex flex-1 flex-col items-center justify-center text-center">
-        <div className="flex h-[180px] items-center justify-center">
-          {currentSlide.hani}
-        </div>
+      <main className="flex flex-1 flex-col justify-end pb-[27dvh] text-center">
+        <h1 className="whitespace-pre-line font-title text-[23px] font-bold leading-[1.08] tracking-[-0.02em] text-ink">
+          {currentSlide.title}
+        </h1>
+        <p className="mt-4 whitespace-pre-line font-title text-[14px] leading-[1.55] tracking-[-0.02em] text-ink/80">
+          {currentSlide.description}
+        </p>
+      </main>
 
-        <div className="mt-12 space-y-5">
-          <h1 className="whitespace-pre-line font-title text-[22px] font-bold leading-snug text-ink">
-            {currentSlide.title}
-          </h1>
-          <p className="whitespace-pre-line font-body text-[15px] leading-7 text-[#6B6560]">
-            {currentSlide.description}
-          </p>
-        </div>
-      </div>
-
-      <div className="pb-10">
-        <div className="mb-6 flex items-center justify-center gap-2">
+      <footer className="absolute inset-x-6 bottom-[5.8dvh]">
+        <div className="mb-[18px] flex items-center justify-center gap-[14px]">
           {slides.map((slide, index) => (
             <span
               key={slide.title}
               aria-label={`${index + 1}번째 슬라이드`}
               className={cn(
-                'h-2 w-2 rounded-full transition-colors',
-                index === currentIndex ? 'bg-[#003478]' : 'bg-black/20',
+                'h-3 w-3 rounded-full border border-[#BFB8AE] transition-colors',
+                index === currentIndex ? 'border-[#003478] bg-[#003478]' : 'bg-transparent',
               )}
             />
           ))}
@@ -112,11 +99,11 @@ export default function IntroPage() {
         <button
           type="button"
           onClick={goNext}
-          className="h-14 w-full rounded-2xl bg-[#003478] font-body text-base font-bold text-white transition-opacity hover:opacity-90"
+          className="flex h-14 w-full items-center justify-center rounded-[10px] bg-[#003478] font-title text-[16px] font-bold leading-none text-white transition-opacity hover:opacity-90 active:scale-[0.98]"
         >
-          {currentSlide.button}
+          다음 →
         </button>
-      </div>
+      </footer>
     </section>
   )
 }

@@ -20,17 +20,13 @@
 
 ## users 주요 필드
 _id, nickname, email, provider, role,
-subscriptionStatus, points, naraeItems(→ haniItems),
+subscriptionStatus, points, haniItems,
 createdAt
-
- 
 
 ## writingEntries 주요 필드
 _id, authorId, title, body, wordCount,
 visibility(public|link|private), bookId, chapterId,
 isDraft, createdAt, updatedAt
-
- 
 
 ## books 주요 필드
 _id, authorId, title, intro, coverColor,
@@ -38,16 +34,12 @@ visibility(public|link|private),
 status(writing|completed), shelfCategory,
 wordCount, completedAt, createdAt
 
- 
-
 ## subscriptions 주요 필드
 _id, userId, plan(monthly|yearly),
 status(active|cancelled|expired),
 paymentKey, expiresAt, createdAt
 
- 
-
-## 책 두께 기준 (MVP 3단계)
+## 책 두께 기준
 - 얇음: wordCount < 500
 - 보통: 500 ≤ wordCount < 2000
 - 두꺼움: wordCount ≥ 2000

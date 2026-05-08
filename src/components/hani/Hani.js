@@ -10,6 +10,7 @@ import { HaniSVG } from './HaniSVG'
  *   'float'   → 둥실둥실 (기본)
  *   'bounce'  → 통통 (기쁨)
  *   'shake'   → 좌우 흔들 (놀람)
+ *   'loading' → 작은 좌우 흔들림 루프
  *   'nod'     → 끄덕끄덕 (응원)
  */
 export function Hani({
@@ -25,6 +26,7 @@ export function Hani({
     float:  'animate-hani-float',
     bounce: 'animate-hani-bounce',
     shake:  'animate-hani-shake',
+    loading:'animate-hani-loading',
     nod:    'animate-hani-nod',
   }[animate] ?? ''
 

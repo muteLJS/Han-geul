@@ -4,74 +4,69 @@
 import { useEffect } from 'react'
 import { cn } from '@/utils/cn'
 
-/**
- * type: 'center' | 'bottom'
- * - center: 화면 중앙 모달
- * - bottom: 모바일 바텀시트
- */
 export function Modal({
   isOpen,
   onClose,
+  title,
   children,
-  type      = 'center',
-  title     = '',
+  confirmLabel = '확인',
+  cancelLabel = '취소',
+  onConfirm,
+  destructive = false,
+  showActions = false,
+  type = 'center',
   className,
 }) {
-  // 열릴 때 body 스크롤 잠금
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
   if (!isOpen) return null
 
+  if (type === 'bottom') {
+    return <BottomSheet isOpen={isOpen} onClose={onClose} title={title} className={className}>{children}</BottomSheet>
+  }
+
   return (
-    // 딤 배경
-    <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm"
-      style={{ alignItems: type === 'center' ? 'center' : 'flex-end' }}
-      onClick={onClose}
-    >
-      {/* 모달 본체 */}
-      <div
-        className={cn(
-          'bg-[#FAF6EE] w-full relative',
-          type === 'center'
-            ? 'max-w-sm mx-4 rounded-2xl p-6'
-            : 'rounded-t-2xl p-6 pb-10 max-w-lg mx-auto',
-          className
-        )}
-        onClick={(e) => e.stopPropagation()}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-6" onClick={onClose}>
+      <section
+        className={cn('w-full max-w-sm animate-modal-pop rounded-[20px] bg-white p-7 shadow-[0_8px_24px_rgba(0,0,0,0.06)]', className)}
+        onClick={(event) => event.stopPropagation()}
       >
-        {/* 바텀시트 핸들 */}
-        {type === 'bottom' && (
-          <div className="w-10 h-1 bg-[#3A3530]/20 rounded-full mx-auto mb-4" />
+        {title && <h2 className="text-center font-title text-lg font-bold text-ink">{title}</h2>}
+        <div className={cn('font-body text-sm leading-[1.6] text-ink/70', title && 'mt-5')}>{children}</div>
+        {showActions && (
+          <div className="mt-7 grid grid-cols-2 gap-3">
+            <button type="button" onClick={onClose} className="h-12 rounded-[14px] border border-[#E8E2D9] font-body text-sm font-bold text-[#6B6560]">{cancelLabel}</button>
+            <button type="button" onClick={onConfirm} className={cn('h-12 rounded-[14px] font-body text-sm font-bold text-white', destructive ? 'bg-[#CD2E3A]' : 'bg-[#003478]')}>{confirmLabel}</button>
+          </div>
         )}
+      </section>
+    </div>
+  )
+}
 
-        {/* 타이틀 */}
-        {title && (
-          <h2 className="font-title text-lg font-semibold text-[#1A1714] mb-4">
-            {title}
-          </h2>
-        )}
+export function BottomSheet({ isOpen, onClose, title, children, size = 'medium', className }) {
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
 
-        {/* 닫기 버튼 (center 전용) */}
-        {type === 'center' && (
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-[#3A3530]/50 hover:text-[#1A1714] transition-colors"
-            aria-label="닫기"
-          >
-            ✕
-          </button>
-        )}
+  if (!isOpen) return null
 
+  const heights = { small: 'min-h-[30dvh]', medium: 'min-h-[50dvh]', large: 'min-h-[70dvh]', full: 'min-h-[90dvh]' }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" onClick={onClose}>
+      <section
+        className={cn('w-full max-w-lg animate-sheet-up rounded-t-[24px] bg-white p-5 pb-[calc(env(safe-area-inset-bottom)+20px)] shadow-[0_-8px_24px_rgba(0,0,0,0.06)]', heights[size], className)}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="mx-auto mb-4 h-1 w-8 rounded-full bg-[#E8E2D9]" />
+        {title && <h2 className="mb-5 font-title text-lg font-bold text-ink">{title}</h2>}
         {children}
-      </div>
+      </section>
     </div>
   )
 }

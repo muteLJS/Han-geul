@@ -1,8 +1,6 @@
 // src/app/layout.js
 import './globals.css'
 import { Noto_Serif_KR, Noto_Sans_KR, Nanum_Pen_Script } from 'next/font/google'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import SessionProvider from '@/components/providers/SessionProvider'
 
 const notoSerif = Noto_Serif_KR({
@@ -47,8 +45,8 @@ export const viewport = {
   maximumScale: 1,
 }
 
-export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions)
+export default function RootLayout({ children }) {
+  const session = null
 
   return (
     <html lang="ko" className={`${notoSerif.variable} ${notoSans.variable} ${nanumPen.variable}`}>

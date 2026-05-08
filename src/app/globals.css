@@ -32,33 +32,25 @@
   --font-body:           'Noto Sans KR', sans-serif;
   --font-hani:           'Nanum Pen Script', cursive;
 
-  /* 글쓰기 화면 최대 너비 */
+  /* 모바일 웹 셸 */
+  --max-mobile:          512px;
   --max-write:           700px;
 
   /* 트랜지션 */
   --transition-base:     150ms ease;
+}
 
-  /* ── 한지 텍스처 ── */
-.hanji-texture {
-  position: relative;
-  background-color: #FAF6EE;
+/* ── 한지 배경: 화면 배경은 이 질감만 사용 */
+.hanji-bg,
+.hanji-texture,
+.texture-hanji {
+  background-color: var(--color-hanji);
   background-image:
-    radial-gradient(ellipse at 20% 30%, #F5EDD8 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 70%, #EDE0C8 0%, transparent 50%);
-  box-shadow: inset 0 0 60px rgba(180, 140, 80, 0.08);
-}
-
-.hanji-texture::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  z-index: 0;
-}
-
+    radial-gradient(ellipse at 18% 12%, rgba(245, 237, 216, 0.85) 0%, transparent 52%),
+    radial-gradient(ellipse at 86% 78%, rgba(237, 224, 200, 0.72) 0%, transparent 48%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: 100% 100%, 100% 100%, 180px 180px;
 }
 
 /* ── 4. 다크모드 변수 */
@@ -116,6 +108,16 @@ button {
   border: none;
   background: none;
   font-family: var(--font-body);
+}
+
+button:disabled,
+[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+a,
+[role='button'] {
+  cursor: pointer;
 }
 
 input,
@@ -230,3 +232,45 @@ textarea {
 .animate-hani-bounce { animation: haniBounce 0.8s ease-in-out infinite; }
 .animate-hani-shake  { animation: haniShake  0.6s ease-in-out; }
 .animate-hani-nod    { animation: haniNod    1.2s ease-in-out infinite; }
+
+
+@keyframes goldConfetti {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(100dvh) rotate(120deg); opacity: 0; }
+}
+
+.animate-gold-confetti { animation: goldConfetti 2s ease-out forwards; }
+
+@keyframes haniLoading {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-2px) rotate(-3deg); }
+  75% { transform: translateX(2px) rotate(3deg); }
+}
+@keyframes loadingDot {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+@keyframes skeletonPulse {
+  0%, 100% { background-color: #E8E2D9; }
+  50% { background-color: #FAF6EE; }
+}
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes sheetUp {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+@keyframes progressComplete {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(1.02); }
+}
+
+.animate-hani-loading { animation: haniLoading 1.2s ease-in-out infinite; }
+.animate-loading-dot { animation: loadingDot 1.2s ease-in-out infinite; }
+.animate-skeleton-pulse { animation: skeletonPulse 1.5s ease-in-out infinite; }
+.animate-modal-pop { animation: modalPop 0.28s ease-out forwards; }
+.animate-sheet-up { animation: sheetUp 0.3s ease-out forwards; }
+.animate-progress-complete { animation: progressComplete 0.45s ease-out; transform-origin: center; }

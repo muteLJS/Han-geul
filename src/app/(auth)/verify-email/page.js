@@ -24,7 +24,7 @@ export default function VerifyEmailPage() {
   }
 
   return (
-    <section className="flex min-h-dvh flex-col items-center justify-center bg-[#FAF6EE] px-6 text-center animate-fade-in">
+    <section className="flex min-h-dvh flex-col items-center justify-center bg-transparent px-6 text-center animate-fade-in">
       <div className="animate-hani-float text-[80px] leading-none" aria-hidden="true">
         ✉️
       </div>

@@ -49,9 +49,9 @@ export function TopBar({
         'fixed top-0 left-0 right-0 z-40 h-14',
         'flex items-center justify-between px-4',
         'max-w-lg mx-auto',
-        variant === 'default'     && 'bg-[#FAF6EE] border-b border-[#3A3530]/10',
+        variant === 'default'     && 'hanji-bg border-b border-[#3A3530]/10',
         variant === 'transparent' && 'bg-transparent',
-        variant === 'writing'     && 'bg-[#FAF6EE] border-b border-[#3A3530]/10',
+        variant === 'writing'     && 'hanji-bg border-b border-[#3A3530]/10',
         className
       )}
     >

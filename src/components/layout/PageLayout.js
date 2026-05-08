@@ -20,7 +20,7 @@ export function PageLayout({
   return (
     <main
       className={cn(
-        'min-h-screen bg-[#FAF6EE]',
+        'min-h-dvh hanji-bg',
         'w-full max-w-lg mx-auto',
         hasTopBar    && 'pt-14',
         hasBottomTab && 'pb-20',

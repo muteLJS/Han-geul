@@ -75,6 +75,20 @@ export function HaniSVG({
       </g>
     ),
 
+
+
+    // 슬픔: 미안한 눈 + 작은 눈물
+    sad: (
+      <g>
+        <path d="M22.5 54 Q26 51 29.5 54" stroke={outlineColor} strokeWidth="2.2" fill="none" strokeLinecap="round" />
+        <path d="M34.5 54 Q38 51 41.5 54" stroke={outlineColor} strokeWidth="2.2" fill="none" strokeLinecap="round" />
+        <path d="M28 62 Q32 59 36 62" stroke={outlineColor} strokeWidth="1.8" fill="none" strokeLinecap="round" />
+        <path d="M44 57 C46 60 47 62 44 64 C41 62 42 60 44 57Z" fill="#88A9C3" opacity="0.8" />
+        <ellipse cx="19" cy="58" rx="4.5" ry="2.8" fill="#F4BFBF" opacity="0.65" />
+        <ellipse cx="45" cy="58" rx="4.5" ry="2.8" fill="#F4BFBF" opacity="0.65" />
+      </g>
+    ),
+
     // 놀람: 크게 뜬 눈 + 동그란 입
     surprised: (
       <g>

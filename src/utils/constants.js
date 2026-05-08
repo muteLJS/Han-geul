@@ -42,10 +42,10 @@ export const SORT_OPTIONS = [
 
 // 하단 탭바 (알림 아이콘 없음 — 총괄본 명시)
 export const BOTTOM_TABS = [
-  { href: '/',        label: '홈',        icon: 'home'    },
-  { href: '/explore', label: '탐색',      icon: 'explore' },
-  { href: '/library', label: '도서함',    icon: 'library' },
-  { href: '/mypage',  label: '마이페이지', icon: 'mypage'  },
+  { href: '/',           label: '홈',   icon: 'home'     },
+  { href: '/write',      label: '쓰기', icon: 'write'    },
+  { href: '/vocabulary', label: '연습', icon: 'practice' },
+  { href: '/library',    label: '기록', icon: 'library'  },
 ]
 
 // AI 금지 표현 (프롬프트 작성 시 참고)

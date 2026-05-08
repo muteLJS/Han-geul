@@ -32,7 +32,7 @@ export default function SignupNicknamePage() {
   }
 
   return (
-    <section className="flex min-h-dvh flex-col bg-[#FAF6EE] px-6 py-5 animate-fade-in">
+    <section className="flex min-h-dvh flex-col bg-transparent px-6 py-5 animate-fade-in">
       <header className="flex items-center justify-between font-body text-sm text-ink">
         <Link href="/signup" className="font-medium">← 뒤로</Link>
         <span className="font-bold text-[#6B6560]">2 / 2</span>
@@ -53,7 +53,7 @@ export default function SignupNicknamePage() {
         <div className="mt-10">
           <label className="block font-body text-sm font-bold text-ink">
             닉네임
-            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F1EA] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
+            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F0E8] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
               <input
                 type="text"
                 value={nickname}
@@ -74,7 +74,7 @@ export default function SignupNicknamePage() {
                   key={suggestion}
                   type="button"
                   onClick={() => setNickname(suggestion)}
-                  className="rounded-full bg-[#F5F1EA] px-4 py-2 font-body text-[13px] font-medium text-[#6B6560]"
+                  className="rounded-full bg-[#F5F0E8] px-4 py-2 font-body text-[13px] font-medium text-[#6B6560]"
                 >
                   {suggestion}
                 </button>
@@ -83,7 +83,7 @@ export default function SignupNicknamePage() {
                 type="button"
                 onClick={refreshSuggestions}
                 aria-label="추천 닉네임 새로고침"
-                className="rounded-full bg-[#F5F1EA] px-3 py-2 text-sm"
+                className="rounded-full bg-[#F5F0E8] px-3 py-2 text-sm"
               >
                 🔄
               </button>

@@ -98,3 +98,56 @@ export const pointRules = {
   streak7:     50,
   firstBook:   100,
 }
+
+
+export const colorSystem = {
+  primary: {
+    blue: '#003478',
+    blueLight: '#EEF2FA',
+  },
+  accent: {
+    gold: '#D4A853',
+    goldLight: '#FFF8E7',
+  },
+  neutral: {
+    ink: '#1A1A2E',
+    brownDark: '#3D3530',
+    gray: '#6B6560',
+    grayLight: '#9E9590',
+    grayLighter: '#C8C4BD',
+    border: '#E8E2D9',
+    card: '#F5F0E8',
+    hanji: '#FAF6EE',
+  },
+  semantic: {
+    success: '#4CAF50',
+    error: '#CD2E3A',
+    warning: '#FF9800',
+  },
+}
+
+export const typographyScale = {
+  labelMin: '10px',
+  meta: '12px',
+  subtitle: '13px',
+  body: '14px',
+  cardBody: '15px',
+  editor: '16px',
+  header: '17px',
+  completion: '18px',
+  cardTitle: '20px',
+  screenTitle: '22px',
+  largeNumber: '24px',
+  onboardingTitle: '28px',
+  pointLogo: '36px',
+  resultScore: '52px',
+}
+
+export const haniSizes = {
+  small: 45,
+  medium: 68,
+  default: 90,
+  large: 134,
+  xlarge: 180,
+  full: 224,
+}

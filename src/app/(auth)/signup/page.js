@@ -59,7 +59,7 @@ export default function SignupPage() {
   }
 
   return (
-    <section className="flex min-h-dvh flex-col bg-[#FAF6EE] px-6 py-5 animate-fade-in">
+    <section className="flex min-h-dvh flex-col bg-transparent px-6 py-5 animate-fade-in">
       <header className="flex items-center justify-between font-body text-sm text-ink">
         <Link href="/login" className="font-medium">← 뒤로</Link>
         <span className="font-bold text-[#6B6560]">1 / 2</span>
@@ -75,7 +75,7 @@ export default function SignupPage() {
           <div className="mt-8 space-y-5">
             <label className="block font-body text-sm font-bold text-ink">
               이메일
-              <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F1EA] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
+              <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F0E8] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
                 <input
                   type="email"
                   value={email}
@@ -88,7 +88,7 @@ export default function SignupPage() {
 
             <label className="block font-body text-sm font-bold text-ink">
               비밀번호
-              <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F1EA] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
+              <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F0E8] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
@@ -116,7 +116,7 @@ export default function SignupPage() {
 
             <label className="block font-body text-sm font-bold text-ink">
               비밀번호 확인
-              <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F1EA] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
+              <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F0E8] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
                 <input
                   type="password"
                   value={passwordConfirm}

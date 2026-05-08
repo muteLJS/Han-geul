@@ -37,7 +37,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <section className="flex min-h-dvh flex-col bg-[#FAF6EE] px-6 py-5 animate-fade-in">
+    <section className="flex min-h-dvh flex-col bg-transparent px-6 py-5 animate-fade-in">
       <header className="text-center font-title text-xl font-bold text-ink">
         비밀번호 재설정
       </header>
@@ -48,7 +48,7 @@ export default function ResetPasswordPage() {
 
           <label className="mt-10 block font-body text-sm font-bold text-ink">
             새 비밀번호
-            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F1EA] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
+            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F0E8] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
@@ -76,7 +76,7 @@ export default function ResetPasswordPage() {
 
           <label className="mt-8 block font-body text-sm font-bold text-ink">
             새 비밀번호 확인
-            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F1EA] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
+            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F0E8] px-4 focus-within:ring-[1.5px] focus-within:ring-[#003478]">
               <input
                 type="password"
                 value={passwordConfirm}

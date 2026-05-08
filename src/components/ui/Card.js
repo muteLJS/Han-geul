@@ -13,7 +13,7 @@ export function Card({
   ...props
 }) {
   const base = `
-    bg-[#FAF6EE] rounded-2xl
+    hanji-bg rounded-2xl
     transition-all duration-150
   `
 

@@ -1,89 +1,72 @@
 // src/components/layout/BottomTabBar.js
 'use client'
 
+import { Suspense } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { cn } from '@/utils/cn'
 import { BOTTOM_TABS } from '@/utils/constants'
 
-// 아이콘 컴포넌트 (SVG 인라인 — 이미지 의존 없음)
-function TabIcon({ icon, active }) {
-  const color = active ? '#003478' : '#3A3530'
-  const opacity = active ? '1' : '0.4'
-
-  const icons = {
-    home: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M3 9.5L12 3L21 9.5V20C21 20.55 20.55 21 20 21H15V15H9V21H4C3.45 21 3 20.55 3 20V9.5Z"
-          fill={color}
-          opacity={opacity}
-        />
-      </svg>
-    ),
-    explore: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="7" stroke={color} strokeWidth="2" opacity={opacity} />
-        <path d="M16.5 16.5L21 21" stroke={color} strokeWidth="2" strokeLinecap="round" opacity={opacity} />
-      </svg>
-    ),
-    library: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <rect x="4"  y="3" width="4" height="18" rx="1" fill={color} opacity={opacity} />
-        <rect x="10" y="3" width="4" height="18" rx="1" fill={color} opacity={opacity} />
-        <rect x="16" y="3" width="4" height="18" rx="1" fill={color} opacity={opacity} />
-      </svg>
-    ),
-    mypage: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="8" r="4" fill={color} opacity={opacity} />
-        <path
-          d="M4 20C4 16.686 7.582 14 12 14C16.418 14 20 16.686 20 20"
-          stroke={color} strokeWidth="2" strokeLinecap="round" opacity={opacity}
-        />
-      </svg>
-    ),
-  }
-
-  return icons[icon] ?? null
+const TAB_ICONS = {
+  home: '🏠',
+  write: '✏️',
+  practice: '📖',
+  library: '📊',
 }
 
-export function BottomTabBar() {
+function BottomTabBarInner() {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
 
-  // 글쓰기 화면에서는 탭바 숨김
-  const hideOn = ['/write', '/copying', '/self-writing', '/book-write']
+  const hideOn = ['/write', '/copying', '/self-writing', '/book-write', '/settings', '/notifications', '/hani']
   if (hideOn.some(path => pathname.startsWith(path))) return null
+  if (pathname === '/vocabulary' && searchParams.get('view')) return null
+  if (pathname === '/library' && searchParams.get('view')) return null
+  if (pathname === '/mypage' && searchParams.get('view')) return null
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#FAF6EE] border-t border-[#3A3530]/10">
-      <ul className="flex items-center justify-around max-w-lg mx-auto h-16 px-2">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-[#E8E2D9] bg-white pb-[env(safe-area-inset-bottom)]">
+      <ul className="mx-auto grid h-14 max-w-lg grid-cols-4 px-2">
         {BOTTOM_TABS.map(({ href, label, icon }) => {
-          const isActive = pathname === href ||
-            (href !== '/' && pathname.startsWith(href))
+          const isActive = pathname === href || (href !== '/' && pathname.startsWith(href))
+          const isWrite = icon === 'write'
 
           return (
-            <li key={href} className="flex-1">
+            <li key={href} className="flex items-stretch justify-center">
               <Link
                 href={href}
-                className="flex flex-col items-center justify-center gap-1 py-2 w-full"
+                aria-current={isActive ? 'page' : undefined}
+                className={cn(
+                  'relative flex min-w-[64px] flex-col items-center justify-center gap-0.5 px-2 font-body transition-colors duration-150',
+                  isActive ? 'text-[#003478]' : 'text-[#9E9590]',
+                )}
               >
-                <TabIcon icon={icon} active={isActive} />
                 <span
                   className={cn(
-                    'text-[10px] font-body transition-colors',
-                    isActive
-                      ? 'text-[#003478] font-medium'
-                      : 'text-[#3A3530]/40'
+                    'flex items-center justify-center leading-none',
+                    isWrite ? 'h-9 w-12 text-[28px]' : 'text-[22px]',
+                    isWrite && isActive && 'rounded-[12px] bg-[#EEF2FA]',
                   )}
+                  aria-hidden="true"
                 >
-                  {label}
+                  {TAB_ICONS[icon]}
                 </span>
+                <span className="text-[10px] font-bold leading-none">{label || '쓰기'}</span>
+                {isActive && <span className="absolute bottom-0 h-0.5 w-8 rounded-full bg-[#003478]" />}
               </Link>
             </li>
           )
         })}
       </ul>
     </nav>
+  )
+}
+
+
+export function BottomTabBar() {
+  return (
+    <Suspense fallback={null}>
+      <BottomTabBarInner />
+    </Suspense>
   )
 }

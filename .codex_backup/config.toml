@@ -55,6 +55,13 @@ args = ["/home/ajrqh1030/.nvm/versions/node/v24.15.0/lib/node_modules/oh-my-code
 enabled = true
 startup_timeout_sec = 5
 
+[mcp_servers.TalkToFigma]
+command = "/home/ajrqh1030/.bun/bin/bun"
+args = ["/home/ajrqh1030/cursor-talk-to-figma-mcp-main/src/talk_to_figma_mcp/server.ts"]
+startup_timeout_sec = 20
+tool_timeout_sec = 120
+enabled = true
+
 # OMX Wiki MCP Server (persistent project knowledge base)
 [mcp_servers.omx_wiki]
 command = "/home/ajrqh1030/.nvm/versions/node/v24.15.0/bin/node"
@@ -69,3 +76,4 @@ status_line = ["model-with-reasoning", "git-branch", "context-remaining", "total
 
 # ============================================================
 # End oh-my-codex
+

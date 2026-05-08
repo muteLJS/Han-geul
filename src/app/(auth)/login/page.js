@@ -23,7 +23,7 @@ export default function LoginPage() {
   }
 
   return (
-    <section className="flex min-h-dvh flex-col bg-[#FAF6EE] animate-fade-in">
+    <section className="flex min-h-dvh flex-col bg-transparent animate-fade-in">
       <div className="flex min-h-[40dvh] flex-col items-center justify-center px-6 py-10 text-center">
         <h1 className="font-title text-4xl font-bold text-ink">한-글</h1>
         <Hani pose="default" face="happy" size={68} animate="float" className="mt-5" />
@@ -41,13 +41,13 @@ export default function LoginPage() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="이메일을 입력해주세요"
-              className="mt-2 h-[52px] w-full rounded-xl bg-[#F5F1EA] px-4 font-body text-sm outline-none transition-shadow focus:ring-[1.5px] focus:ring-[#003478]"
+              className="mt-2 h-[52px] w-full rounded-xl bg-[#F5F0E8] px-4 font-body text-sm outline-none transition-shadow focus:ring-[1.5px] focus:ring-[#003478]"
             />
           </label>
 
           <label className="block font-body text-sm font-bold text-ink">
             비밀번호
-            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F1EA] px-4 transition-shadow focus-within:ring-[1.5px] focus-within:ring-[#003478]">
+            <div className="mt-2 flex h-[52px] items-center rounded-xl bg-[#F5F0E8] px-4 transition-shadow focus-within:ring-[1.5px] focus-within:ring-[#003478]">
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}

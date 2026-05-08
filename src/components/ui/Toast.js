@@ -4,33 +4,14 @@
 import { useEffect, useState } from 'react'
 import { cn } from '@/utils/cn'
 
-/**
- * type: 'success' | 'error' | 'info'
- * 상단 중앙에 표시, 2.5초 후 자동 사라짐
- *
- * 사용법:
- *   const [toast, setToast] = useState(null)
- *   setToast({ message: '저장됐어요', type: 'success' })
- *   <Toast toast={toast} onClose={() => setToast(null)} />
- */
 export function Toast({ toast, onClose }) {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     if (!toast) return undefined
-
-    const showTimer = window.setTimeout(() => {
-      setVisible(true)
-    }, 0)
-
-    const hideTimer = window.setTimeout(() => {
-      setVisible(false)
-    }, 2500)
-
-    const closeTimer = window.setTimeout(() => {
-      onClose()
-    }, 2800)
-
+    const showTimer = window.setTimeout(() => setVisible(true), 0)
+    const hideTimer = window.setTimeout(() => setVisible(false), toast.duration ?? 2000)
+    const closeTimer = window.setTimeout(() => onClose?.(), (toast.duration ?? 2000) + 300)
     return () => {
       window.clearTimeout(showTimer)
       window.clearTimeout(hideTimer)
@@ -40,30 +21,29 @@ export function Toast({ toast, onClose }) {
 
   if (!toast) return null
 
-  const types = {
-    success: 'bg-[#3A3530] text-[#FAF6EE]',
-    error:   'bg-[#CD2E3A] text-[#FAF6EE]',
-    info:    'bg-[#4A7C8E] text-[#FAF6EE]',
+  const type = toast.type ?? 'success'
+  const position = toast.position ?? (type === 'point' ? 'point' : 'top')
+  const styles = {
+    success: 'bg-[rgba(26,26,46,0.85)] text-white',
+    point: 'bg-[#D4A853] text-white',
+    error: 'bg-[#CD2E3A] text-white',
   }
-
-  const icons = {
-    success: '✓',
-    error:   '✕',
-    info:    'ℹ',
-  }
+  const icons = { success: '✓', point: '✨', error: '✕' }
 
   return (
     <div
       className={cn(
-        'fixed top-5 left-1/2 -translate-x-1/2 z-[100]',
-        'flex items-center gap-2 px-5 py-3 rounded-full shadow-lg',
-        'text-sm font-body font-medium',
-        'transition-all duration-300',
-        types[toast.type ?? 'success'],
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+        'fixed z-[100] flex items-center gap-2 rounded-[20px] px-4 py-2.5 font-body text-sm font-bold shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all',
+        position === 'point' ? 'right-4 top-[calc(env(safe-area-inset-top)+16px)] duration-200' : 'left-1/2 top-[calc(env(safe-area-inset-top)+16px)] -translate-x-1/2 duration-300',
+        styles[type],
+        visible
+          ? 'opacity-100 translate-y-0 translate-x-0'
+          : position === 'point'
+            ? 'translate-x-2 opacity-0'
+            : '-translate-y-2 opacity-0',
       )}
     >
-      <span>{icons[toast.type ?? 'success']}</span>
+      <span aria-hidden="true">{icons[type]}</span>
       <span>{toast.message}</span>
     </div>
   )
